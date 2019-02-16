@@ -1,0 +1,50 @@
+{
+  "name": "transform-package-json",
+  "version": "1.0.0",
+  "description": "Utility script to transform package.json - Remove scripts, devDependencies and change properties.",
+  "author": "SPA Tools",
+  "license": "MIT",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/spatools/transform-package-json.git"
+  },
+  "bugs": {
+    "url": "https://github.com/spatools/transform-package-json/issues"
+  },
+  "bin": {
+    "transform-package": "./bin/transform-package.js"
+  },
+  "keywords": [
+    "package.json",
+    "package",
+    "transformer",
+    "transform",
+    "utilities",
+    "javascript",
+    "utils",
+    "spatools"
+  ],
+  "scripts": {
+    "build": "npm run lint && npm run build-ts && npm run build-assets",
+    "build-ts": "tsc -p . --outDir dist",
+    "build-assets": "cpx \"{package.json,LICENSE,README.md}\" dist",
+    "test": "node ./dist/bin/transform-package.js --remove scripts --remove devDependencies --remove keywords --version 2.0.0 --license GNU package.json temp/",
+    "lint": "tslint -c tslint.json -p tsconfig.json",
+    "release": "npm run build && npm test && cd dist && npm publish"
+  },
+  "dependencies": {
+    "lodash.omit": "^4.5.0",
+    "mkdirp": "^0.5.1",
+    "nopt": "^4.0.1"
+  },
+  "devDependencies": {
+    "@types/lodash.omit": "^4.5.5",
+    "@types/mkdirp": "^0.5.2",
+    "@types/node": "^11.9.4",
+    "@types/nopt": "^3.0.29",
+    "cpx": "^1.5.0",
+    "tslint": "^5.12.1",
+    "typescript": "^3.3.3"
+  }
+}
